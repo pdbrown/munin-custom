@@ -1,0 +1,2 @@
+# Clean speedfan log
+0       0       *       *       *       root    rm /var/log/speedfan.log

@@ -1,0 +1,33 @@
+#!/usr/local/bin/python
+
+import sys
+import json
+import subprocess
+import time
+
+command = ''
+if len(sys.argv) > 1:
+    command = sys.argv[1]
+
+if command == 'config':
+    print "graph_title GPU Temps [C]"
+    print "graph_args -l 30 -u 90"
+    print "graph_vlabel C"
+    print "graph_category cryptocoin"
+    print "GPU0.label GPU0"
+    print "GPU1.label GPU1"
+    print "GPU2.label GPU2"
+    print "GPU3.label GPU3"
+    sys.exit(0)
+
+stats_json = subprocess.check_output("tail -1 /var/log/speedfan.log", shell=True)
+stats = json.loads(stats_json)
+
+if time.time() - long(stats['time']) > 120:
+    # logging is dead
+    sys.exit(2)
+
+print "GPU0.value %s" % str(stats['GPU'][0])
+print "GPU1.value %s" % str(stats['GPU'][1])
+print "GPU2.value %s" % str(stats['GPU'][2])
+print "GPU3.value %s" % str(stats['GPU'][3])
