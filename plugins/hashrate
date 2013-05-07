@@ -13,7 +13,6 @@ if len(sys.argv) > 1:
 
 if command == 'config':
     print "graph_title Slush Hashrate"
-    print "graph_args --upper-limit 3000 -l 0"
     print "graph_vlabel MHash/s"
     print "graph_category cryptocoin"
     print "Hashrate.label Hashrate"
